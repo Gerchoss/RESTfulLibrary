@@ -1,0 +1,7 @@
+CREATE TABLE category (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    category_name VARCHAR(172) NOT NULL
+);
+
+
+

@@ -1,0 +1,11 @@
+CREATE TABLE library (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    book_id BIGINT NOT NULL,
+    client_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    rental_value DECIMAL(10, 2) NOT NULL,
+    rental_expiration DATE,
+    deleted BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_book FOREIGN KEY (book_id) REFERENCES book(id) ON DELETE CASCADE,
+    CONSTRAINT fk_client FOREIGN KEY (fk_client_id) REFERENCES fk_client(id) ON DELETE CASCADE
+);

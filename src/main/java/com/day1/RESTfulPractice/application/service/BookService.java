@@ -7,6 +7,8 @@ import com.day1.RESTfulPractice.controller.dto.response.BookResponse;
 import com.day1.RESTfulPractice.db.BookRepository;
 import com.day1.RESTfulPractice.db.entities.BookEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +23,9 @@ public class BookService {
     private final BookRepository bookRepository;
 
     @Transactional(readOnly = true)
-    public List<BookResponse> getAllBooks(){
-        List<BookEntity> bookEntity = bookRepository.findAll();
-        return bookMapper.toResponseList(bookEntity);
+    public Page<BookResponse> getAllBooks(Pageable pageable){
+        Page<BookEntity> bookEntity = bookRepository.findAll(pageable);
+        return bookEntity.map(bookMapper::toResponse);
     }
 
     //rehacer según goytia con excepciones y estructura acorde (al usar mapper agrego un paso mas, se puede agregar a la clase request DTO)
