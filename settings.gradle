@@ -1,0 +1,3 @@
+rootProject.name = 'RESTfulPractice'
+
+enableFeaturePreview('GROOVY_COMPILATION_AVOIDANCE')
