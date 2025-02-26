@@ -17,8 +17,8 @@ import java.time.LocalDate;
 public class LibraryResponse {
 
     private Long id;
-    private BookEntity book;
-    private ClientEntity client;
+    private BookEntity bookEntity;
+    private ClientEntity clientEntity;
     private Double rentalValue;
     private LocalDate rentalExpiration;
 }

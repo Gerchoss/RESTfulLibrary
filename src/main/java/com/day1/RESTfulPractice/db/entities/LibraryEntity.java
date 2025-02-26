@@ -1,5 +1,7 @@
 package com.day1.RESTfulPractice.db.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity(name = "library")
 @Table(name = "library")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class LibraryEntity {
 
     @Id
@@ -22,11 +25,13 @@ public class LibraryEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", nullable = false)
-    private BookEntity book;
+    @JsonIgnore
+    private BookEntity bookEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)
-    private ClientEntity client;
+    @JsonIgnore
+    private ClientEntity clientEntity;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

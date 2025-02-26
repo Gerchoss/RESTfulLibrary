@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class LibraryMapper {
     public LibraryEntity toEntity(LibraryRequest libraryRequest){
         LibraryEntity libraryEntity = new LibraryEntity();
-        libraryEntity.setBook(libraryRequest.getBook());
-        libraryEntity.setClient(libraryRequest.getClient());
+        libraryEntity.setBookEntity(libraryRequest.getBookEntity());
+        libraryEntity.setClientEntity(libraryRequest.getClientEntity());
         libraryEntity.setRentalExpiration(libraryRequest.getRentalExpiration());
         libraryEntity.setRentalValue(libraryRequest.getRentalValue());
         return libraryEntity;
@@ -24,21 +24,29 @@ public class LibraryMapper {
             return null;
         }
         return LibraryResponse.builder()
-                .book(libraryEntity.getBook())
-                .client(libraryEntity.getClient())
+                .bookEntity(libraryEntity.getBookEntity())
+                .clientEntity(libraryEntity.getClientEntity())
+                .rentalExpiration(libraryEntity.getRentalExpiration())
+                .rentalValue(libraryEntity.getRentalValue())
+                //ver como obtener un id aca .bookEntity(libraryEntity.getBookEntity())
+                .build();
+    }
+
+    //ver como llamo los datos lazy
+
+    public static LibraryResponse findById(LibraryEntity libraryEntity){
+        return LibraryResponse.builder()
+                .bookEntity(libraryEntity.getBookEntity())
+                .clientEntity(libraryEntity.getClientEntity())
                 .rentalExpiration(libraryEntity.getRentalExpiration())
                 .rentalValue(libraryEntity.getRentalValue())
                 .build();
     }
 
-    public static LibraryResponse findById(LibraryEntity libraryEntity){
-        return LibraryResponse.builder()
-                .book(libraryEntity.getBook())
-                .client(libraryEntity.getClient())
-                .rentalExpiration(libraryEntity.getRentalExpiration())
-                .rentalValue(libraryEntity.getRentalValue())
-                .build();
-    }
+    //ver por aca, aca esta el problema con el lazy del buscar todos, lo comentado seguro era lo que estaba dando problemas
+    //convertir el mapper en builder
+    //utilizar el mapper añadiendo los valores no traidos por el lazy
+
 
     public List<LibraryResponse> toResponseList(List<LibraryEntity> libraryEntity){
         return libraryEntity.stream()

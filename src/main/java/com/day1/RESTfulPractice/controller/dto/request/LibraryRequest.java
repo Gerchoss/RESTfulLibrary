@@ -19,10 +19,10 @@ public class LibraryRequest {
     private Long id;
 
     @NotNull(message = "book not selected")
-    private BookEntity book;
+    private BookEntity bookEntity;
 
     @NotNull(message = "client not selected")
-    private ClientEntity client;
+    private ClientEntity clientEntity;
 
     @NotNull(message = "miss Rental Value per day")
     private Double rentalValue;
